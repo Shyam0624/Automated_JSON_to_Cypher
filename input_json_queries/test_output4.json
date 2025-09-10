@@ -1,0 +1,58 @@
+{
+  "nodes": [
+    {
+      "label": "Candidate",
+      "alias": "c"
+    },
+    {
+      "label": "Resume",
+      "alias": "r"
+    },
+    {
+      "label": "Skill",
+      "alias": "s1"
+    },
+    {
+      "label": "Skill",
+      "alias": "s2"
+    }
+  ],
+  "relationships": [
+    {
+      "node1": "c",
+      "node2": "r",
+      "type": "HAS_RESUME"
+    },
+    {
+      "node1": "r",
+      "node2": "s1",
+      "type": "HAS_SKILL"
+    },
+    {
+      "node1": "r",
+      "node2": "s2",
+      "type": "HAS_SKILL"
+    }
+  ],
+  "whereClause": {
+    "type": "AND",
+    "conditions": [
+      {
+        "field": "s1.`Name`",
+        "operator": "=",
+        "value": "Python"
+      },
+      {
+        "field": "s2.`Name`",
+        "operator": "=",
+        "value": "Java"
+      }
+    ]
+  },
+  "return": {
+    "fields": [
+      "c.`Email`"
+    ],
+    "distinct": false
+  }
+}

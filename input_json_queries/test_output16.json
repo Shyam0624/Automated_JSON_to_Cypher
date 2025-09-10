@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    { "label": "Job", "alias": "j" }
+  ],
+  "relationships": [],
+  "whereClause": {
+    "type": "AND",
+    "conditions": [
+      { "field": "j.Job Title", "operator": "=", "value": "Developer" }
+    ]
+  },
+  "return": {
+    "fields": [ "j.Job Title" ],
+    "distinct": false
+  }
+}

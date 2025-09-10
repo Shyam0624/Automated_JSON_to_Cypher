@@ -1,0 +1,48 @@
+{
+  "nodes": [
+    {
+      "label": "Candidate",
+      "alias": "c"
+    },
+    {
+      "label": "Resume",
+      "alias": "r"
+    },
+    {
+      "label": "Job",
+      "alias": "j"
+    }
+  ],
+  "relationships": [
+    {
+      "node1": "c",
+      "node2": "r",
+      "type": "HAS_RESUME",
+      "optional": true
+    },
+    {
+      "node1": "r",
+      "node2": "j",
+      "type": "SUBMITTED_FOR",
+      "optional": true
+    }
+  ],
+  "whereClause": {
+    "type": "AND",
+    "conditions": [
+      {
+        "field": "c.`Email`",
+        "operator": "=",
+        "value": "test@example.com"
+      }
+    ]
+  },
+  "return": {
+    "fields": [
+      "c.`Email`",
+      "r",
+      "j.`Job Title`"
+    ],
+    "distinct": false
+  }
+}

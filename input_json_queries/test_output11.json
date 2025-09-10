@@ -1,0 +1,81 @@
+{
+  "nodes": [
+    {
+      "label": "Candidate",
+      "alias": "c"
+    },
+    {
+      "label": "Resume",
+      "alias": "r"
+    },
+    {
+      "label": "Skill",
+      "alias": "s"
+    },
+    {
+      "label": "WorkExperience",
+      "alias": "we"
+    },
+    {
+      "label": "Location",
+      "alias": "l"
+    }
+  ],
+  "relationships": [
+    {
+      "node1": "c",
+      "node2": "r",
+      "type": "HAS_RESUME"
+    },
+    {
+      "node1": "r",
+      "node2": "s",
+      "type": "HAS_SKILL"
+    },
+    {
+      "node1": "r",
+      "node2": "we",
+      "type": "HAS_EXPERIENCE"
+    },
+    {
+      "node1": "r",
+      "node2": "l",
+      "type": "LOCATED_AT"
+    }
+  ],
+  "whereClause": {
+    "type": "AND",
+    "conditions": [
+      {
+        "field": "s.`name`",
+        "operator": "IN",
+        "value": [
+          "Git",
+          "AWS",
+          "Python Programming"
+        ]
+      },
+      {
+        "field": "l.`city`",
+        "operator": "=",
+        "value": "Bengaluru"
+      },
+      {
+        "field": "we.`durationInMonths`",
+        "operator": ">=",
+        "value": 24
+      },
+      {
+        "field": "we.`durationInMonths`",
+        "operator": "<=",
+        "value": 48
+      }
+    ]
+  },
+  "return": {
+    "fields": [
+      "c"
+    ],
+    "distinct": false
+  }
+}

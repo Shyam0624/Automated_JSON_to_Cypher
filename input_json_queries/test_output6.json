@@ -1,0 +1,45 @@
+{
+  "nodes": [
+    {
+      "label": "Candidate",
+      "alias": "c"
+    },
+    {
+      "label": "Resume",
+      "alias": "r"
+    },
+    {
+      "label": "Job",
+      "alias": "j"
+    }
+  ],
+  "relationships": [
+    {
+      "node1": "c",
+      "node2": "r",
+      "type": "HAS_RESUME"
+    },
+    {
+      "node1": "r",
+      "node2": "j",
+      "type": "SUBMITTED_FOR"
+    }
+  ],
+  "whereClause": {
+    "type": "AND",
+    "conditions": [
+      {
+        "field": "j.`Job Title`",
+        "operator": "CONTAINS",
+        "value": "Senior"
+      }
+    ]
+  },
+  "return": {
+    "fields": [
+      "c.`Email` AS Candidate",
+      "j.`Job Title` AS SeniorJobAppliedFor"
+    ],
+    "distinct": false
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "nodes": [
+    {
+      "label": "Candidate",
+      "alias": "c"
+    },
+    {
+      "label": "Resume",
+      "alias": "r"
+    },
+    {
+      "label": "Skill",
+      "alias": "s"
+    }
+  ],
+  "relationships": [
+    {
+      "node1": "c",
+      "node2": "r",
+      "type": "HAS_RESUME"
+    },
+    {
+      "node1": "r",
+      "node2": "s",
+      "type": "HAS_SKILL"
+    }
+  ],
+  "whereClause": {
+    "type": "AND",
+    "conditions": [
+      {
+        "field": "s.`Name`",
+        "operator": "IN",
+        "value": [
+          "Git",
+          "AWS",
+          "Python"
+        ]
+      }
+    ]
+  },
+  "with": {
+    "fields": [
+      "c"
+    ],
+    "aggregations": [
+      {
+        "function": "count",
+        "field": "s.`Name`",
+        "alias": "skill_count",
+        "distinct": false
+      }
+    ]
+  },
+  "withClause": {
+    "type": "AND",
+    "conditions": [
+      {
+        "field": "skill_count",
+        "operator": "=",
+        "value": 3
+      }
+    ]
+  },
+  "return": {
+    "fields": [
+      "c.`Email`"
+    ],
+    "distinct": false
+  }
+}

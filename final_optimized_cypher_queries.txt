@@ -1,0 +1,162 @@
+FINAL OPTIMIZED CYPHER QUERIES
+Generated with single-MATCH chaining optimization and anchored OPTIONALs
+================================================================================
+
+FILE: test_output1.json
+STATUS: ✅ SUCCESS
+QUERY:
+MATCH (j:Job)-[:REQUIRES]->(s:Skill)<-[:HAS_SKILL]-(r:Resume)<-[:HAS_RESUME]-(c:Candidate)
+WHERE j.`Job Title` = 'Senior Developer'
+WITH c, j, count(s) AS matchingSkills
+WHERE matchingSkills >= 2
+RETURN c.`Email` AS CandidateEmail, j.`Job Title` AS Job, matchingSkills
+ORDER BY matchingSkills ASC
+LIMIT 100
+------------------------------------------------------------
+
+FILE: test_output10.json
+STATUS: ✅ SUCCESS
+QUERY:
+MATCH (c:Candidate)-[:HAS_RESUME]->(r:Resume)-[:HAS_SKILL]->(s:Skill)<-[:REQUIRES]-(j:Job)<-[:SUBMITTED_FOR]-(r:Resume)
+WHERE j.`Job Title` = 'Software Engineer'
+RETURN s.`Name` AS MatchedSkill, c.`Email` AS CandidateEmail
+------------------------------------------------------------
+
+FILE: test_output11.json
+STATUS: ✅ SUCCESS
+QUERY:
+MATCH (c:Candidate)-[:HAS_RESUME]->(r:Resume), (r:Resume)-[:HAS_SKILL]->(s:Skill), (r:Resume)-[:HAS_EXPERIENCE]->(we:WorkExperience), (r:Resume)-[:LOCATED_AT]->(l:Location)
+WHERE s.`name` IN ['Git', 'AWS', 'Python Programming'] AND l.`city` = 'Bengaluru' AND we.`durationInMonths` >= 24 AND we.`durationInMonths` <= 48
+RETURN c
+------------------------------------------------------------
+
+FILE: test_output12.json
+STATUS: ✅ SUCCESS
+QUERY:
+MATCH (c:Candidate)-[:HAS_RESUME]->(r:Resume)-[:HAS_SKILL]->(s:Skill)
+WHERE s.`Name` IN ['Git', 'AWS', 'Python']
+WITH c, count(s.`Name`) AS skill_count
+WHERE skill_count = 3
+RETURN c.`Email`
+------------------------------------------------------------
+
+FILE: test_output13.json
+STATUS: ✅ SUCCESS
+QUERY:
+MATCH (c:Candidate {Email: 'test@example.com'})
+OPTIONAL MATCH (c:Candidate)-[:HAS_RESUME]->(r:Resume)-[:SUBMITTED_FOR]->(j:Job)
+WHERE c.`Email` = 'test@example.com'
+RETURN c.`Email`, r, j.`Job Title`
+------------------------------------------------------------
+
+FILE: test_output14.json
+STATUS: ✅ SUCCESS
+QUERY:
+MATCH (j:Job)-[:LOCATED_AT]->(l:Location)
+WHERE l.`city` = 'Bengaluru' OR l.`city` = 'Mumbai'
+RETURN j.`Job Title`, l.`city`
+------------------------------------------------------------
+
+FILE: test_output15.json
+STATUS: ✅ SUCCESS
+QUERY:
+MATCH (s:Skill)
+WHERE s.`Name` STARTS WITH 'Py'
+RETURN s.`Name`
+------------------------------------------------------------
+
+FILE: test_output16.json
+STATUS: ❌ FAILED
+QUERY:
+❌ Error: Field 'j.Job Title' contains spaces and is not backticked.
+------------------------------------------------------------
+
+FILE: test_output17.json
+STATUS: ❌ FAILED
+QUERY:
+❌ Error: Relationship node2 alias 'x' not found in nodes.
+------------------------------------------------------------
+
+FILE: test_output18.json
+STATUS: ✅ SUCCESS
+QUERY:
+MATCH (c:Candidate)-[:HAS_RESUME]->(r:Resume), (j:Job)
+OPTIONAL MATCH (r:Resume)-[:SUBMITTED_FOR]->(j:Job)<-[:REFERRED_FOR]-(r:Resume)
+WHERE c.`Email` = 'alice@example.com'
+RETURN DISTINCT c.`Email`, j.`Job Title`
+------------------------------------------------------------
+
+FILE: test_output2.json
+STATUS: ✅ SUCCESS
+QUERY:
+MATCH (c:Candidate)-[:HAS_RESUME]->(r:Resume)-[:SUBMITTED_FOR]->(j:Job)
+WHERE j.`Job Title` = 'Data Scientist'
+RETURN c.`Email`
+------------------------------------------------------------
+
+FILE: test_output3.json
+STATUS: ✅ SUCCESS
+QUERY:
+MATCH (r:Resume)-[:SUBMITTED_FOR]->(j:Job)
+WITH j, count(r) AS NumberOfApplicants
+RETURN j.`Job Title`, NumberOfApplicants
+ORDER BY NumberOfApplicants ASC
+------------------------------------------------------------
+
+FILE: test_output4.json
+STATUS: ✅ SUCCESS
+QUERY:
+MATCH (c:Candidate)-[:HAS_RESUME]->(r:Resume), (r:Resume)-[:HAS_SKILL]->(s1:Skill), (r:Resume)-[:HAS_SKILL]->(s2:Skill)
+WHERE s1.`Name` = 'Python' AND s2.`Name` = 'Java'
+RETURN c.`Email`
+------------------------------------------------------------
+
+FILE: test_output5.json
+STATUS: ✅ SUCCESS
+QUERY:
+MATCH (j:Job)-[:POSTED_BY]->(co:Company)
+WITH co, count(j) AS JobCount
+WHERE JobCount > 5
+RETURN co.`Name`, JobCount
+ORDER BY JobCount ASC
+LIMIT 3
+------------------------------------------------------------
+
+FILE: test_output6.json
+STATUS: ✅ SUCCESS
+QUERY:
+MATCH (c:Candidate)-[:HAS_RESUME]->(r:Resume)-[:SUBMITTED_FOR]->(j:Job)
+WHERE j.`Job Title` CONTAINS 'Senior'
+RETURN c.`Email` AS Candidate, j.`Job Title` AS SeniorJobAppliedFor
+------------------------------------------------------------
+
+FILE: test_output7.json
+STATUS: ✅ SUCCESS
+QUERY:
+MATCH (c:Candidate)-[:HAS_RESUME]->(r:Resume), (r:Resume)-[:SUBMITTED_FOR]->(j:Job), (r:Resume)-[:HAS_SKILL]->(s:Skill)
+WHERE j.`Job Title` = 'Software Engineer' AND s.`Name` = 'Python'
+RETURN c.`Email`
+------------------------------------------------------------
+
+FILE: test_output8.json
+STATUS: ✅ SUCCESS
+QUERY:
+MATCH (j:Job)-[:REQUIRES]->(s:Skill)<-[:HAS_SKILL]-(r:Resume)<-[:HAS_RESUME]-(c:Candidate)
+WHERE j.`Job Title` = 'Senior Developer'
+WITH c, j, count(s) AS matchingSkills
+WHERE matchingSkills >= 2
+RETURN c.`Email` AS CandidateEmail, j.`Job Title` AS Job, matchingSkills
+ORDER BY matchingSkills ASC
+------------------------------------------------------------
+
+FILE: test_output9.json
+STATUS: ✅ SUCCESS
+QUERY:
+MATCH (j:Job)-[:REQUIRES]->(s:Skill)<-[:HAS_SKILL]-(r:Resume)<-[:HAS_RESUME]-(c:Candidate)
+WHERE j.`Job Title` = 'Senior Developer' AND j.`Job Title` = 'Senior Developer'
+WITH c, j, count(s) AS matchingSkills
+WHERE matchingSkills >= 2
+RETURN c.`Email` AS CandidateEmail, j.`Job Title` AS Job, matchingSkills
+ORDER BY matchingSkills ASC
+------------------------------------------------------------
+

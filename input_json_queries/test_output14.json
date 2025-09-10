@@ -1,0 +1,41 @@
+{
+  "nodes": [
+    {
+      "label": "Job",
+      "alias": "j"
+    },
+    {
+      "label": "Location",
+      "alias": "l"
+    }
+  ],
+  "relationships": [
+    {
+      "node1": "j",
+      "node2": "l",
+      "type": "LOCATED_AT"
+    }
+  ],
+  "whereClause": {
+    "type": "OR",
+    "conditions": [
+      {
+        "field": "l.`city`",
+        "operator": "=",
+        "value": "Bengaluru"
+      },
+      {
+        "field": "l.`city`",
+        "operator": "=",
+        "value": "Mumbai"
+      }
+    ]
+  },
+  "return": {
+    "fields": [
+      "j.`Job Title`",
+      "l.`city`"
+    ],
+    "distinct": false
+  }
+}

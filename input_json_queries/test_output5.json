@@ -1,0 +1,53 @@
+{
+  "nodes": [
+    {
+      "label": "Company",
+      "alias": "co"
+    },
+    {
+      "label": "Job",
+      "alias": "j"
+    }
+  ],
+  "relationships": [
+    {
+      "node1": "j",
+      "node2": "co",
+      "type": "POSTED_BY"
+    }
+  ],
+  "with": {
+    "fields": [
+      "co"
+    ],
+    "aggregations": [
+      {
+        "function": "count",
+        "field": "j",
+        "alias": "JobCount"
+      }
+    ]
+  },
+  "withClause": {
+    "type": "AND",
+    "conditions": [
+      {
+        "field": "JobCount",
+        "operator": ">",
+        "value": 5
+      }
+    ]
+  },
+  "return": {
+    "fields": [
+      "co.`Name`",
+      "JobCount"
+    ],
+    "distinct": false
+  },
+  "orderBy": {
+    "field": "JobCount",
+    "direction": "ASC"
+  },
+  "limit": 3
+}

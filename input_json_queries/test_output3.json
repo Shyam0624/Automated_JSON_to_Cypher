@@ -1,0 +1,42 @@
+{
+  "nodes": [
+    {
+      "label": "Job",
+      "alias": "j"
+    },
+    {
+      "label": "Resume",
+      "alias": "r"
+    }
+  ],
+  "relationships": [
+    {
+      "node1": "r",
+      "node2": "j",
+      "type": "SUBMITTED_FOR"
+    }
+  ],
+  "with": {
+    "fields": [
+      "j"
+    ],
+    "aggregations": [
+      {
+        "function": "count",
+        "field": "r",
+        "alias": "NumberOfApplicants"
+      }
+    ]
+  },
+  "return": {
+    "fields": [
+      "j.`Job Title`",
+      "NumberOfApplicants"
+    ],
+    "distinct": false
+  },
+  "orderBy": {
+    "field": "NumberOfApplicants",
+    "direction": "ASC"
+  }
+}

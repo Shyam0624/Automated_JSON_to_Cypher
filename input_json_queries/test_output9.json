@@ -1,0 +1,87 @@
+{
+  "nodes": [
+    {
+      "label": "Job",
+      "alias": "j"
+    },
+    {
+      "label": "Skill",
+      "alias": "s"
+    },
+    {
+      "label": "Candidate",
+      "alias": "c"
+    },
+    {
+      "label": "Resume",
+      "alias": "r"
+    }
+  ],
+  "relationships": [
+    {
+      "node1": "j",
+      "node2": "s",
+      "type": "REQUIRES"
+    },
+    {
+      "node1": "c",
+      "node2": "r",
+      "type": "HAS_RESUME"
+    },
+    {
+      "node1": "r",
+      "node2": "s",
+      "type": "HAS_SKILL"
+    }
+  ],
+  "whereClause": {
+    "type": "AND",
+    "conditions": [
+      {
+        "field": "j.`Job Title`",
+        "operator": "=",
+        "value": "Senior Developer"
+      },
+      {
+        "field": "j.`Job Title`",
+        "operator": "=",
+        "value": "Senior Developer"
+      }
+    ]
+  },
+  "with": {
+    "fields": [
+      "c",
+      "j"
+    ],
+    "aggregations": [
+      {
+        "function": "count",
+        "field": "s",
+        "alias": "matchingSkills"
+      }
+    ]
+  },
+  "withClause": {
+    "type": "AND",
+    "conditions": [
+      {
+        "field": "matchingSkills",
+        "operator": ">=",
+        "value": 2
+      }
+    ]
+  },
+  "return": {
+    "fields": [
+      "c.`Email` AS CandidateEmail",
+      "j.`Job Title` AS Job",
+      "matchingSkills"
+    ],
+    "distinct": false
+  },
+  "orderBy": {
+    "field": "matchingSkills",
+    "direction": "ASC"
+  }
+}

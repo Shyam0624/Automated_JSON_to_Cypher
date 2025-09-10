@@ -1,0 +1,59 @@
+{
+  "nodes": [
+    {
+      "label": "Job",
+      "alias": "j"
+    },
+    {
+      "label": "Skill",
+      "alias": "s"
+    },
+    {
+      "label": "Resume",
+      "alias": "r"
+    },
+    {
+      "label": "Candidate",
+      "alias": "c"
+    }
+  ],
+  "relationships": [
+    {
+      "node1": "j",
+      "node2": "s",
+      "type": "REQUIRES"
+    },
+    {
+      "node1": "r",
+      "node2": "s",
+      "type": "HAS_SKILL"
+    },
+    {
+      "node1": "c",
+      "node2": "r",
+      "type": "HAS_RESUME"
+    },
+    {
+      "node1": "r",
+      "node2": "j",
+      "type": "SUBMITTED_FOR"
+    }
+  ],
+  "whereClause": {
+    "type": "AND",
+    "conditions": [
+      {
+        "field": "j.`Job Title`",
+        "operator": "=",
+        "value": "Software Engineer"
+      }
+    ]
+  },
+  "return": {
+    "fields": [
+      "s.`Name` AS MatchedSkill",
+      "c.`Email` AS CandidateEmail"
+    ],
+    "distinct": false
+  }
+}

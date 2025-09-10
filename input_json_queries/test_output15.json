@@ -1,0 +1,25 @@
+{
+  "nodes": [
+    {
+      "label": "Skill",
+      "alias": "s"
+    }
+  ],
+  "relationships": [],
+  "whereClause": {
+    "type": "AND",
+    "conditions": [
+      {
+        "field": "s.`Name`",
+        "operator": "STARTS WITH",
+        "value": "Py"
+      }
+    ]
+  },
+  "return": {
+    "fields": [
+      "s.`Name`"
+    ],
+    "distinct": false
+  }
+}

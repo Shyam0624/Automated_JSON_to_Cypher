@@ -1,0 +1,16 @@
+# Byte-compiled / cache files
+__pycache__/
+*.pyc
+
+# VSCode settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Output and logs
+*.log
+
+# Environment files
+.venv/

@@ -1,0 +1,13 @@
+{
+  "nodes": [
+    { "label": "Candidate", "alias": "c" },
+    { "label": "Resume", "alias": "r" }
+  ],
+  "relationships": [
+    { "node1": "c", "node2": "x", "type": "HAS_RESUME" }
+  ],
+  "return": {
+    "fields": [ "c.Email" ],
+    "distinct": false
+  }
+}
