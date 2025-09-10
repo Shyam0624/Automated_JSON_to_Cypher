@@ -160,5 +160,4 @@ This project is licensed under the MIT License.
 - Pydantic for data validation.
 - Python community for libraries and support.
 
-
-## 🌟 Keep Querying
+---
