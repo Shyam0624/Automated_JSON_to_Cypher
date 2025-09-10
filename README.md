@@ -42,22 +42,22 @@ It supports advanced features like chained MATCH and OPTIONAL MATCH clauses, pro
 ## ⚙️ Installation
 
 ### Prerequisites
-...
+'''
 - Python 3.8 or higher
-...
+'''
 
 ### Clone the Repository
 
-...
-git clone https://github.com/Shyam0624/automated-json-to-cypher.git
+'''
+git clone https://github.com/Shyam0624/automated-json-to-cypher.git  
 cd automated-json-to-cypher
-...
+'''
 
 ### Install Dependencies
 
-...
+'''
 pip install -r requirements.txt
-...
+'''
 
 ---
 
@@ -77,20 +77,20 @@ python JSONtoCypher_production.py
 
 ### 3. Example Output
 
-...
-📁 Processing: test_output1.json
- ✅ SUCCESS
- Preview: ['MATCH (j:Job)-[:REQUIRES]->(s:Skill)<-[:HAS_SKILL]-(r:Resume)<-[:HAS_RESUME]-(c:Candidate)', ...]
-...
+'''
+📁 Processing: test_output1.json  
+✅ SUCCESS  
+Preview: ['MATCH (j:Job)-[:REQUIRES]->(s:Skill)<-[:HAS_SKILL]-(r:Resume)<-[:HAS_RESUME]-(c:Candidate)', ...]
+'''
 
 ---
 
 ## 📥 Input Format
 
-...
+
 Each JSON file should define nodes, relationships, and query clauses.  
 Example:
-
+'''
 {
   "nodes": [
     { "label": "Candidate", "alias": "c" },
@@ -112,7 +112,7 @@ Example:
     "distinct": true
   }
 }
-...
+'''
 
 Key fields:
 - nodes: List of graph nodes with label and alias.
@@ -131,7 +131,7 @@ Key fields:
 
 ## 🗂️ Directory Structure
 
-...
+'''
 Automated-JSON-to-Cypher/
 │
 ├── JSONtoCypher_production.py
@@ -143,9 +143,9 @@ Automated-JSON-to-Cypher/
 ├── README.md
 ├── requirements.txt
 └── .gitignore
-...
----
+'''
 
+---
 ## 🛡️ License
 
 This project is licensed under the MIT License.
