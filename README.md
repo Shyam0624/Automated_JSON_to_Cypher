@@ -43,7 +43,7 @@ It supports advanced features like chained MATCH and OPTIONAL MATCH clauses, pro
 
 ### Prerequisites
 ```
-- Python 3.8 or higher
+Python 3.8 or higher
 ```
 
 ### Clone the Repository
@@ -70,7 +70,9 @@ pip install -r requirements.txt
 
 ### 2. Run the Converter
 
+```
 python JSONtoCypher_production.py
+```
 
 - The script will process all .json files in input_json_queries/ (or the specified directory).
 - Output Cypher queries and statuses are saved to final_optimized_cypher_queries.txt.
@@ -158,6 +160,5 @@ This project is licensed under the MIT License.
 - Pydantic for data validation.
 - Python community for libraries and support.
 
----
 
 ## 🌟 Keep Querying
